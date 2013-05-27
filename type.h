@@ -6,6 +6,10 @@ typedef unsigned char  BYTE;
 typedef unsigned short UINT16;
 typedef short          INT16;
 typedef unsigned int   UINT32;
-typedef int            INT32;
+typedef int INT32;
+
+typedef enum {
+	false, true
+} boolean;
 
 #endif

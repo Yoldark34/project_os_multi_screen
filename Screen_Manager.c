@@ -1,5 +1,6 @@
 #include "Screen_Manager.h"
 #include "Processus.h"
+#include "Outils.h"
 #define NB_SCREEN 12
 
 typedef struct assoc {
@@ -43,10 +44,13 @@ int getScreenIndexFromPid(UINT32 p_pid) {
 }
 
 void switchScreen(int p_screenIndex) {
+	Affiche_Chaine(Entier_Vers_Chaine(p_screenIndex));
+	/*
 	if (screenBuffers.currentScreenIndex != p_screenIndex) {
 		screenBuffers.currentScreenIndex = p_screenIndex;
 		BufferToScreen();
 	}
+	//*/
 }
 
 void BufferToScreen() {

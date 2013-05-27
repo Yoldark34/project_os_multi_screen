@@ -6,6 +6,7 @@
 #include "HARD_8042_Clavier.h"
 #include "Ordonnanceur.h"
 
+boolean Ctrl = false;
 
 //##############################################################################
 // QUAND CES ROUTINES S'EXECUTENT, NOUS SOMMES DANS LE RING 0
@@ -32,16 +33,45 @@ void CallBack_IRQ0()
 void CallBack_IRQ1()
 {
    INITIALISER_DS(SELECTEUR_DATA_NOYAU);
-   UINT16 L_Code=Lecture_Scan_Code();
-   if (L_Code==78) {
-    
-       Periode_Ordonnanceur+=5;
-       if (Periode_Ordonnanceur>400L) Periode_Ordonnanceur=400L;
-   }
-   if (L_Code==74){
-       Periode_Ordonnanceur-=5;
-       if (Periode_Ordonnanceur<6L) Periode_Ordonnanceur=6L;
-   }
+	UINT16 L_Code = Lecture_Scan_Code();
+	switch (L_Code) {
+		case 78:
+			Periode_Ordonnanceur += 5;
+			if (Periode_Ordonnanceur > 400L) Periode_Ordonnanceur = 400L;
+			break;
+		case 74:
+			Periode_Ordonnanceur -= 5;
+			if (Periode_Ordonnanceur < 6L) Periode_Ordonnanceur = 6L;
+			break;
+		case 29://LCtrl down
+			Ctrl = true;
+			break;
+		case 157://LCtrl up
+			Ctrl = false;
+			break;
+		case 59://F1
+		case 60://F2
+		case 61://F3
+		case 62://F4
+		case 63://F5
+		case 64://F6
+		case 65://F7
+		case 66://F8
+		case 67://F9
+		case 68://F10
+			if (Ctrl) {
+				switchScreen(L_Code - 58);
+			}
+			break;
+		case 87://F11
+		case 88://F12
+			if (Ctrl) {
+				switchScreen(L_Code - 76);
+			}
+			break;
+		default:
+			break;
+	}
    
 }
 //------------------------------------------------------------------------------

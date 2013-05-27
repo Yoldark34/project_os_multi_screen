@@ -72,9 +72,9 @@ char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
                                   // on est donc dans le segment data du process
                                   // l'adresse 0 est en réalité "BASE_DATA_USER"
 
- while(1){
+ while(1) {
 
-     API_puts((char*)0x0002000,15);
+		//API_puts((char*)0x0002000,15);
 
      }
  
@@ -84,9 +84,9 @@ char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
 volatile void Processus_1()
 {
 char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
- while(1){
+ while(1) {
 
-    API_puts((char*)0x0002000,4);   
+		//API_puts((char*)0x0002000,4);
  }
  
  }
@@ -97,8 +97,8 @@ volatile void Processus_2()
 char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
  while(1){
 
-  
-     API_puts((char*)0x0002000,5);
+
+		//API_puts((char*)0x0002000,5);
   
     // ceci génère une exception de protection :
     // L_Message=(char*)0x000;  
@@ -113,8 +113,8 @@ volatile void Processus_3()
 char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
 
  while(1){
-   
-  API_puts((char*)0x0002000,6);
+
+		//API_puts((char*)0x0002000,6);
  }
  
  }
@@ -122,8 +122,8 @@ char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
 
 
 //------------------------------------------------------------------------------
-void OS_Main()
-{
+void OS_Main() {
+
   Affiche_Message(">>>Initialisation de la Pile (ESP) : ","OK"); 
  
   Initialisation_IDT();
@@ -132,11 +132,10 @@ void OS_Main()
   Initialisation_TSS();
   Affiche_Message(">>>Initialisation du TSS : ","OK");
 
-
-  Initialisation_Pagination();
+	Initialisation_Pagination();
   Affiche_Message(">>>Initialisation de la Pagination : ","OK");
-  
-  Initialisation_Tables_Pages_Process();
+
+	Initialisation_Tables_Pages_Process();
   Affiche_Message(">>>Initialisation des tables de pages process : ","OK");
   
   Initialisation_BitMap_Memoire();
@@ -148,47 +147,47 @@ void OS_Main()
  
   Initialisation_8253(1193);
   Affiche_Message(">>>Initialisation du controleur 8253 : ","OK");
- 
-  Initialisation_Info_Processus();
-  Affiche_Message(">>>Initialisation Info Process : ","OK");
+
+	Initialisation_Info_Processus();
+	Affiche_Message(">>>Initialisation Info Process : ","OK");
  
 
-    Numero_Process_Courrant=0;    
+	Numero_Process_Courrant=0;    
     
-    // ici nous sommes encore dans le noyau, 
-    // les datas des processus sont donc chargées via le segmant data de l'OS
-    // il faut donc prévoir le décalage  BASE_DATA_USER
-   Charge_Processus(0, (UINT32)Processus_Idle, 8);
-   Affiche_Message(">>> Chargement code process 0 ","OK"); 
-   Copier_Memoire_Process(0,(BYTE*)BASE_DATA_USER+0x0002000,"Idle\n",6);
-   Affiche_Message(">>> Init data process 0 ","OK"); 
+	// ici nous sommes encore dans le noyau, 
+	// les datas des processus sont donc chargées via le segmant data de l'OS
+	// il faut donc prévoir le décalage  BASE_DATA_USER
+	Charge_Processus(0, (UINT32)Processus_Idle, 8);
+	  Affiche_Message(">>> Chargement code process 0 ","OK"); 
+	 Copier_Memoire_Process(0,(BYTE*)BASE_DATA_USER+0x0002000,"Idle\n",6);
+	 Affiche_Message(">>> Init data process 0 ","OK"); 
+
+	Charge_Processus(1, (UINT32)Processus_1, 8);
+	Affiche_Message(">>> Chargement code process 1 ","OK"); 
+	Copier_Memoire_Process(1,(BYTE*)BASE_DATA_USER+0x0002000,"-----Tache 1\n",14);
+	Affiche_Message(">>> Init data process 1 ","OK"); 
    
-   Charge_Processus(1, (UINT32)Processus_1, 8);
-    Affiche_Message(">>> Chargement code process 1 ","OK"); 
-   Copier_Memoire_Process(1,(BYTE*)BASE_DATA_USER+0x0002000,"-----Tache 1\n",14);
-   Affiche_Message(">>> Init data process 1 ","OK"); 
+	Charge_Processus(2, (UINT32)Processus_2, 8);
+	 Affiche_Message(">>> Chargement code process 2 ","OK"); 
+	Copier_Memoire_Process(2,(BYTE*)BASE_DATA_USER+0x0002000,"----------Tache 2\n",19);
+	Affiche_Message(">>> Init data process 2 ","OK"); 
    
-   Charge_Processus(2, (UINT32)Processus_2, 8);
-    Affiche_Message(">>> Chargement code process 2 ","OK"); 
-   Copier_Memoire_Process(2,(BYTE*)BASE_DATA_USER+0x0002000,"----------Tache 2\n",19);
-   Affiche_Message(">>> Init data process 2 ","OK"); 
-   
-   Charge_Processus(3, (UINT32)Processus_3, 8);
-    Affiche_Message(">>> Chargement code process 3 ","OK"); 
-   Copier_Memoire_Process(3,(BYTE*)BASE_DATA_USER+0x0002000,"---------------Tache 3\n",24);
-   Affiche_Message(">>> Init Data process 3 ","OK"); 
+	Charge_Processus(3, (UINT32)Processus_3, 8);
+	 Affiche_Message(">>> Chargement code process 3 ","OK"); 
+	Copier_Memoire_Process(3,(BYTE*)BASE_DATA_USER+0x0002000,"---------------Tache 3\n",24);
+	Affiche_Message(">>> Init Data process 3 ","OK");
 
 
- volatile T_INFO_PROCESSUS* L_Processus;
-   L_Processus =Donne_Info_Processus(0);
-//  AUTORISE_INTERRUPTION;  
+	volatile T_INFO_PROCESSUS* L_Processus;
+	L_Processus = Donne_Info_Processus(0);
+
+	//AUTORISE_INTERRUPTION;
 	Attendre_Touche_Relache();
- 
-   Periode_Ordonnanceur=10L;
-    Donne_La_Main_Au_Processus(0); // donne la main en faisant via le schéduleur => les int sont donc activées
 
- 
-    
+	Periode_Ordonnanceur = 10L;
+	Donne_La_Main_Au_Processus(0); // donne la main en faisant via le schéduleur => les int sont donc activées
+
+	
   
     
    while(1);
