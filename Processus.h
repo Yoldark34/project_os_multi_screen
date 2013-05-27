@@ -42,6 +42,7 @@ typedef struct {
 } T_CONTEXTE_REGISTRES;
 #pragma pack()
 
+#define NB_PROCESS_MAX 64
 #define TAILLE_CONTEXTE_REGISTRE 48
 #pragma pack(1)
 
@@ -52,7 +53,7 @@ typedef struct {
 		T_CONTEXTE_REGISTRES Registres;
 		UINT32 Contexte_Registres[sizeof (T_CONTEXTE_REGISTRES) >> 2];
 	};
-
+	UINT32 Pid;
 	T_ETAT_PROCESS Etat;
 } T_INFO_PROCESSUS;
 #pragma pack()

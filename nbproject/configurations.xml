@@ -25,6 +25,10 @@
         <itemPath>HARD_8042_Clavier.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f7" displayName="ECRAN" projectFiles="true">
+        <logicalFolder name="f1" displayName="MULTIPLE_SCREEN" projectFiles="true">
+          <itemPath>Screen_Manager.c</itemPath>
+          <itemPath>Screen_Manager.h</itemPath>
+        </logicalFolder>
         <itemPath>Ecran.c</itemPath>
         <itemPath>Ecran.h</itemPath>
       </logicalFolder>
@@ -250,6 +254,10 @@
       </item>
       <item path="Processus.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Screen_Manager.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Screen_Manager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tas_Pages_Systeme.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tas_pages_Systeme.c" ex="false" tool="0" flavor2="0">
@@ -398,6 +406,10 @@
       <item path="Processus.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Processus.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Screen_Manager.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Screen_Manager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="type.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -75,7 +75,8 @@ UINT32 L_Adresse_Tables_Process = Donne_Adresse_Tables_Pages_Process(P_Numero_Pr
     L_Info_Processus->Registres.SS0  = SELECTEUR_STACK_NOYAU;
     L_Info_Processus->Registres.ESP0 =  HAUT_STACK_NOYAU_TACHE_0 - (1024*P_Numero_Process);
 
-    L_Info_Processus->Etat=BLOQUE;
+	L_Info_Processus->Etat = BLOQUE;
+	L_Info_Processus->Pid = P_Numero_Process;
     L_Info_Processus->Registres.CR3 = L_Adresse_Tables_Process;  
 
    INITIALISER_REGISTRE_CR3_VAR(L_Adresse_Tables_Process);    

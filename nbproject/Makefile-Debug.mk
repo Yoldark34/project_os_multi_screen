@@ -61,6 +61,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/PIC_8259A.o \
 	${OBJECTDIR}/Pagination.o \
 	${OBJECTDIR}/Processus.o \
+	${OBJECTDIR}/Screen_Manager.o \
 	${OBJECTDIR}/Tas_pages_Systeme.o
 
 
@@ -210,6 +211,11 @@ ${OBJECTDIR}/Processus.o: Processus.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Processus.o Processus.c
+
+${OBJECTDIR}/Screen_Manager.o: Screen_Manager.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Screen_Manager.o Screen_Manager.c
 
 ${OBJECTDIR}/Tas_pages_Systeme.o: Tas_pages_Systeme.c 
 	${MKDIR} -p ${OBJECTDIR}

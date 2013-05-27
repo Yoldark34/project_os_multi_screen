@@ -5,8 +5,10 @@ Common symbol       size              file
 Le_TSS              0x68              build/Release/MinGW_ELF-Windows/Init_TSS.o
 Info_GDT            0x6               build/Release/MinGW_ELF-Windows/Init_GDT.o
 Info_IDT            0x6               build/Release/MinGW_ELF-Windows/Init_IDT.o
+screenBuffers       0xbba8            build/Release/MinGW_ELF-Windows/Screen_Manager.o
 Chaine_Temporaire_Char
                     0xc               build/Release/MinGW_ELF-Windows/Outils.o
+pidOutScreens       0x204             build/Release/MinGW_ELF-Windows/Screen_Manager.o
 
 Memory Configuration
 
@@ -40,6 +42,7 @@ LOAD build/Release/MinGW_ELF-Windows/Outils.o
 LOAD build/Release/MinGW_ELF-Windows/PIC_8259A.o
 LOAD build/Release/MinGW_ELF-Windows/Pagination.o
 LOAD build/Release/MinGW_ELF-Windows/Processus.o
+LOAD build/Release/MinGW_ELF-Windows/Screen_Manager.o
 Address of section .text set to 0x100000
 Address of section .data set to 0x200000
                 0x08048000                PROVIDE (__executable_start, 0x8048000)
@@ -103,7 +106,7 @@ Address of section .data set to 0x200000
  *(.iplt)
  .iplt          0x00000000        0x0 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
 
-.text           0x00100000     0x2716
+.text           0x00100000     0x28c2
  *(.text.unlikely .text.*_unlikely)
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x00100000       0x18 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
@@ -284,40 +287,45 @@ Address of section .data set to 0x200000
                 0x001025a0                Donne_Info_Processus
                 0x001025c0                Charge_Processus
                 0x001026e0                Copier_Memoire_Process
+ *fill*         0x00102716        0xa 90909090
+ .text          0x00102720      0x1a2 build/Release/MinGW_ELF-Windows/Screen_Manager.o
+                0x00102720                getScreenIndexFromPid
+                0x001027b0                BufferToScreen
+                0x001028a0                switchScreen
  *(.gnu.warning)
 
 .fini
  *(.fini)
-                0x00102716                PROVIDE (__etext, .)
-                0x00102716                PROVIDE (_etext, .)
-                0x00102716                PROVIDE (etext, .)
+                0x001028c2                PROVIDE (__etext, .)
+                0x001028c2                PROVIDE (_etext, .)
+                0x001028c2                PROVIDE (etext, .)
 
-.rodata         0x00102718      0x59e
+.rodata         0x001028c4      0x59e
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.str1.1
-                0x00102718       0xdf build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
- *fill*         0x001027f7        0x1 00
+                0x001028c4       0xdf build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
+ *fill*         0x001029a3        0x1 00
  .rodata.str1.4
-                0x001027f8      0x203 build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
+                0x001029a4      0x203 build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
  .rodata.str1.1
-                0x001029fb       0x38 build/Release/MinGW_ELF-Windows/Allocation_Pages.o
+                0x00102ba7       0x38 build/Release/MinGW_ELF-Windows/Allocation_Pages.o
  .rodata.str1.1
-                0x00102a33       0x1f build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
- *fill*         0x00102a52        0x2 00
+                0x00102bdf       0x1f build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
+ *fill*         0x00102bfe        0x2 00
  .rodata.str1.4
-                0x00102a54       0x28 build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
+                0x00102c00       0x28 build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
                                  0x25 (size before relaxing)
  .rodata.str1.1
-                0x00102a7c      0x118 build/Release/MinGW_ELF-Windows/CallBack_Exception.o
+                0x00102c28      0x118 build/Release/MinGW_ELF-Windows/CallBack_Exception.o
                                 0x11b (size before relaxing)
  .rodata.str1.1
-                0x00102b94       0x63 build/Release/MinGW_ELF-Windows/CallBack_IRQ.o
- *fill*         0x00102bf7        0x1 00
- .rodata        0x00102bf8       0x14 build/Release/MinGW_ELF-Windows/CallBack_VIDEO.o
+                0x00102d40       0x63 build/Release/MinGW_ELF-Windows/CallBack_IRQ.o
+ *fill*         0x00102da3        0x1 00
+ .rodata        0x00102da4       0x14 build/Release/MinGW_ELF-Windows/CallBack_VIDEO.o
  .rodata.str1.1
-                0x00102c0c       0x2c build/Release/MinGW_ELF-Windows/Descripteurs.o
+                0x00102db8       0x2c build/Release/MinGW_ELF-Windows/Descripteurs.o
  .rodata.str1.1
-                0x00102c38       0x7e build/Release/MinGW_ELF-Windows/Pagination.o
+                0x00102de4       0x7e build/Release/MinGW_ELF-Windows/Pagination.o
                                  0x80 (size before relaxing)
 
 .rodata1
@@ -331,8 +339,8 @@ Address of section .data set to 0x200000
 
 .gcc_except_table
  *(.gcc_except_table .gcc_except_table.*)
-                0x00102cb6                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
-                0x00103000                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
+                0x00102e62                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
+                0x00103e62                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
 
 .eh_frame
  *(.eh_frame)
@@ -347,22 +355,22 @@ Address of section .data set to 0x200000
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.preinit_array  0x00103000        0x0
-                0x00103000                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x00103e62        0x0
+                0x00103e62                PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
-                0x00103000                PROVIDE (__preinit_array_end, .)
+                0x00103e62                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00103000        0x0
-                0x00103000                PROVIDE (__init_array_start, .)
+.init_array     0x00103e62        0x0
+                0x00103e62                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array)
-                0x00103000                PROVIDE (__init_array_end, .)
+                0x00103e62                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00103000        0x0
-                0x00103000                PROVIDE (__fini_array_start, .)
+.fini_array     0x00103e62        0x0
+                0x00103e62                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array)
-                0x00103000                PROVIDE (__fini_array_end, .)
+                0x00103e62                PROVIDE (__fini_array_end, .)
 
 .ctors
  *crtbegin.o(.ctors)
@@ -391,9 +399,9 @@ Address of section .data set to 0x200000
 .got
  *(.got)
  *(.igot)
-                0x00103000                . = (. DATA_SEGMENT_RELRO_END 0xc)
+                0x00103e62                . = (. DATA_SEGMENT_RELRO_END 0xc)
 
-.got.plt        0x00103000        0x0
+.got.plt        0x00103e64        0x0 load address 0x00103e62
  *(.got.plt)
  *(.igot.plt)
  .igot.plt      0x00000000        0x0 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
@@ -427,6 +435,7 @@ Address of section .data set to 0x200000
  .data          0x0020013c        0x0 build/Release/MinGW_ELF-Windows/PIC_8259A.o
  .data          0x0020013c        0x0 build/Release/MinGW_ELF-Windows/Pagination.o
  .data          0x0020013c        0x0 build/Release/MinGW_ELF-Windows/Processus.o
+ .data          0x0020013c        0x0 build/Release/MinGW_ELF-Windows/Screen_Manager.o
 
 .data1
  *(.data1)
@@ -434,7 +443,7 @@ Address of section .data set to 0x200000
                 0x0020013c                PROVIDE (edata, .)
                 0x0020013c                __bss_start = .
 
-.bss            0x00200140       0x94
+.bss            0x00200140     0xbe64
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x00200140        0x0 build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
@@ -460,6 +469,7 @@ Address of section .data set to 0x200000
  .bss           0x0020014c        0x0 build/Release/MinGW_ELF-Windows/PIC_8259A.o
  .bss           0x0020014c        0x0 build/Release/MinGW_ELF-Windows/Pagination.o
  .bss           0x0020014c        0x0 build/Release/MinGW_ELF-Windows/Processus.o
+ .bss           0x0020014c        0x0 build/Release/MinGW_ELF-Windows/Screen_Manager.o
  *(COMMON)
  COMMON         0x0020014c        0x6 build/Release/MinGW_ELF-Windows/Init_GDT.o
                 0x0020014c                Info_GDT
@@ -470,12 +480,16 @@ Address of section .data set to 0x200000
                 0x00200160                Le_TSS
  COMMON         0x002001c8        0xc build/Release/MinGW_ELF-Windows/Outils.o
                 0x002001c8                Chaine_Temporaire_Char
-                0x002001d4                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x002001d4                . = ALIGN (0x4)
-                0x002001d4                . = ALIGN (0x4)
-                0x002001d4                _end = .
-                0x002001d4                PROVIDE (end, .)
-                0x002001d4                . = DATA_SEGMENT_END (.)
+ *fill*         0x002001d4        0xc 00
+ COMMON         0x002001e0     0xbdc4 build/Release/MinGW_ELF-Windows/Screen_Manager.o
+                0x002001e0                screenBuffers
+                0x0020bda0                pidOutScreens
+                0x0020bfa4                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x0020bfa4                . = ALIGN (0x4)
+                0x0020bfa4                . = ALIGN (0x4)
+                0x0020bfa4                _end = .
+                0x0020bfa4                PROVIDE (end, .)
+                0x0020bfa4                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
@@ -516,6 +530,7 @@ Address of section .data set to 0x200000
  .comment       0x00000000       0x22 build/Release/MinGW_ELF-Windows/PIC_8259A.o
  .comment       0x00000000       0x22 build/Release/MinGW_ELF-Windows/Pagination.o
  .comment       0x00000000       0x22 build/Release/MinGW_ELF-Windows/Processus.o
+ .comment       0x00000000       0x22 build/Release/MinGW_ELF-Windows/Screen_Manager.o
 
 .debug
  *(.debug)

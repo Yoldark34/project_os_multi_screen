@@ -9,6 +9,9 @@
 #ifndef _ECRAN_H
 #define	_ECRAN_H
 
+#define NOMBRE_COLONNES        80
+#define NOMBRE_LIGNES          25
+
 #define BLEU       0x01
 #define FOND_BLEU  0x10
 #define VERT       0x02
@@ -20,10 +23,12 @@
 #define BLANC      ROUGE | VERT | BLEU
 
 #pragma pack(1)
+
 typedef struct {
     UCHAR Caractere;
     BYTE  Attribut;
-}T_CARACTERE_ECRAN;
+} T_CARACTERE_ECRAN;
+
 #pragma pack()
 
 //extern BYTE* Video;
@@ -40,8 +45,6 @@ typedef struct {
   void Regle_Couleur(BYTE P_Attribut);
   BYTE Donne_Curseur_X();
   BYTE Donne_Curseur_Y();
-
-
 
 #endif	/* _ECRAN_H */
 
