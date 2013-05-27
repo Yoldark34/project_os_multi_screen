@@ -26,6 +26,8 @@
       </logicalFolder>
       <logicalFolder name="f7" displayName="ECRAN" projectFiles="true">
         <logicalFolder name="f1" displayName="MULTIPLE_SCREEN" projectFiles="true">
+          <itemPath>Buffer_Manager.c</itemPath>
+          <itemPath>Buffer_Manager.h</itemPath>
           <itemPath>Screen_Manager.c</itemPath>
           <itemPath>Screen_Manager.h</itemPath>
         </logicalFolder>
@@ -161,6 +163,13 @@
       <item path="BitMap_Memoire.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="BitMap_Memoire.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Buffer_Manager.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="Buffer_Manager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CallBack_Clavier.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -318,6 +327,13 @@
       <item path="BitMap_Memoire.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="BitMap_Memoire.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Buffer_Manager.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <developmentMode>6</developmentMode>
+        </cTool>
+      </item>
+      <item path="Buffer_Manager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="CallBack_Clavier.c" ex="false" tool="0" flavor2="0">
       </item>

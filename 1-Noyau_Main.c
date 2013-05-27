@@ -149,8 +149,10 @@ void OS_Main() {
   Affiche_Message(">>>Initialisation du controleur 8253 : ","OK");
 
 	Initialisation_Info_Processus();
-	Affiche_Message(">>>Initialisation Info Process : ","OK");
- 
+	Affiche_Message(">>>Initialisation Info Process : ", "OK");
+
+	Initialisation_Multi_Screen();
+	Affiche_Message(">>>Initialisation Multi Screen : ", "OK");
 
 	Numero_Process_Courrant=0;    
     
@@ -182,14 +184,11 @@ void OS_Main() {
 	L_Processus = Donne_Info_Processus(0);
 
 	//AUTORISE_INTERRUPTION;
-	Attendre_Touche_Relache();
+	//Attendre_Touche_Relache();
 
 	Periode_Ordonnanceur = 10L;
 	Donne_La_Main_Au_Processus(0); // donne la main en faisant via le schéduleur => les int sont donc activées
-
-	
   
-    
    while(1);
  }
 

@@ -60,13 +60,13 @@ void CallBack_IRQ1()
 		case 67://F9
 		case 68://F10
 			if (Ctrl) {
-				switchScreen(L_Code - 58);
+				switchScreen(L_Code - 59);
 			}
 			break;
 		case 87://F11
 		case 88://F12
 			if (Ctrl) {
-				switchScreen(L_Code - 76);
+				switchScreen(L_Code - 77);
 			}
 			break;
 		default:
@@ -109,7 +109,7 @@ void CallBack_IRQ6()
 void CallBack_IRQ7()
 {
    INITIALISER_DS(SELECTEUR_DATA_NOYAU);
-  Affiche_Chaine("IRQ7\n");
+	//Affiche_Chaine("IRQ7\n");
 
 
 }

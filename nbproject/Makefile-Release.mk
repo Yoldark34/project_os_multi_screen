@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Allocation_Pages.o \
 	${OBJECTDIR}/Appels_Systeme.o \
 	${OBJECTDIR}/BitMap_Memoire.o \
+	${OBJECTDIR}/Buffer_Manager.o \
 	${OBJECTDIR}/CallBack_Clavier.o \
 	${OBJECTDIR}/CallBack_Exception.o \
 	${OBJECTDIR}/CallBack_IRQ.o \
@@ -114,6 +115,11 @@ ${OBJECTDIR}/BitMap_Memoire.o: BitMap_Memoire.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -s -MMD -MP -MF $@.d -o ${OBJECTDIR}/BitMap_Memoire.o BitMap_Memoire.c
+
+${OBJECTDIR}/Buffer_Manager.o: Buffer_Manager.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O3 -s -MMD -MP -MF $@.d -o ${OBJECTDIR}/Buffer_Manager.o Buffer_Manager.c
 
 ${OBJECTDIR}/CallBack_Clavier.o: CallBack_Clavier.c 
 	${MKDIR} -p ${OBJECTDIR}

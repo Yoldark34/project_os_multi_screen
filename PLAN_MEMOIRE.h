@@ -175,7 +175,10 @@
 #define DEBUT_DATA_PROCESS                0x40000000
 
 //#define ADRESSE_BASE_PILE_PROCESS              0xFFFF0000
-
+//==============================================================================
+//                             MULTI SCREEN
+//==============================================================================
+#define ADRESSE_MULTI_SCREEN          0x16821000
 
 #endif	/* PLAN_MEMOIRE_H */
 
