@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="88">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="f12" displayName="API" projectFiles="true">
+        <itemPath>API.c</itemPath>
+        <itemPath>API.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="BOOT" projectFiles="true">
+        <itemPath>0-Noyau_Start.ASM</itemPath>
+        <itemPath>Info_Boot.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="CLAVIER" projectFiles="true">
+        <itemPath>HARD_8042_Clavier.ASM</itemPath>
+        <itemPath>HARD_8042_Clavier.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f7" displayName="ECRAN" projectFiles="true">
+        <itemPath>Ecran.c</itemPath>
+        <itemPath>Ecran.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5" displayName="GDT" projectFiles="true">
+        <itemPath>Init_GDT.c</itemPath>
+        <itemPath>Init_GDT.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f6" displayName="IDT" projectFiles="true">
+        <logicalFolder name="f3" displayName="APPELS SYSTEMES" projectFiles="true">
+          <logicalFolder name="f1" displayName="CLAVIER" projectFiles="true">
+            <itemPath>CallBack_Clavier.c</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="VIDEO" projectFiles="true">
+            <itemPath>CallBack_VIDEO.c</itemPath>
+          </logicalFolder>
+          <itemPath>Appels_Systeme.ASM</itemPath>
+          <itemPath>Appels_Systeme.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f1" displayName="EXCEPTIONS" projectFiles="true">
+          <itemPath>CallBack_Exception.c</itemPath>
+          <itemPath>CallBack_Exception.h</itemPath>
+          <itemPath>EXCEPTIONS.asm</itemPath>
+          <itemPath>EXCEPTIONS.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f2" displayName="IRQ" projectFiles="true">
+          <itemPath>CallBack_IRQ.c</itemPath>
+          <itemPath>CallBack_IRQ.h</itemPath>
+          <itemPath>IRQ.ASM</itemPath>
+          <itemPath>IRQ.h</itemPath>
+          <itemPath>PIC_8259A.c</itemPath>
+          <itemPath>PIC_8259A.h</itemPath>
+        </logicalFolder>
+        <itemPath>Init_IDT.c</itemPath>
+        <itemPath>Init_IDT.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="OUTILS" projectFiles="true">
+        <itemPath>MACRO.h</itemPath>
+        <itemPath>Outils.c</itemPath>
+        <itemPath>Outils.h</itemPath>
+        <itemPath>type.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f9" displayName="PAGINATION" projectFiles="true">
+        <itemPath>Allocation_Pages.c</itemPath>
+        <itemPath>Allocation_Pages.h</itemPath>
+        <itemPath>BitMap_Memoire.c</itemPath>
+        <itemPath>BitMap_Memoire.h</itemPath>
+        <itemPath>Commutation.ASM</itemPath>
+        <itemPath>Ordonnanceur.c</itemPath>
+        <itemPath>Ordonnanceur.h</itemPath>
+        <itemPath>Pagination.c</itemPath>
+        <itemPath>Pagination.h</itemPath>
+        <itemPath>Tas_Pages_Systeme.h</itemPath>
+        <itemPath>Tas_pages_Systeme.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="PLAN MEMOIRE" projectFiles="true">
+        <itemPath>Descripteurs.c</itemPath>
+        <itemPath>Descripteurs.h</itemPath>
+        <itemPath>PLAN_MEMOIRE.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f10" displayName="PROCESSUS" projectFiles="true">
+        <itemPath>Processus.c</itemPath>
+        <itemPath>Processus.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f8" displayName="TIMER" projectFiles="true">
+        <itemPath>HARD_8253_Timer.asm</itemPath>
+        <itemPath>HARD_8253_Timer.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f11" displayName="TSS" projectFiles="true">
+        <itemPath>Couche_User.c</itemPath>
+        <itemPath>Couche_User.h</itemPath>
+        <itemPath>Init_TSS.c</itemPath>
+        <itemPath>Init_TSS.h</itemPath>
+      </logicalFolder>
+      <itemPath>1-Noyau_Main.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>MinGW_ELF|MinGW</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <architecture>1</architecture>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+        <asmTool>
+          <commandLine>-f elf</commandLine>
+        </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/noyau.jlv</output>
+          <commandlineTool>i586-pc-elf-ld.exe</commandlineTool>
+          <commandLine>-Ttext=0x100000 --entry=_start --oformat i586-pc-elf</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="0-Noyau_Start.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="1-Noyau_Main.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="API.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="API.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Allocation_Pages.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Allocation_Pages.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Appels_Systeme.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="Appels_Systeme.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BitMap_Memoire.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="BitMap_Memoire.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_Clavier.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_Exception.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_Exception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_IRQ.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_IRQ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_VIDEO.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Commutation.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="Couche_User.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Couche_User.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Descripteurs.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="Descripteurs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EXCEPTIONS.asm" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="EXCEPTIONS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ecran.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="Ecran.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HARD_8042_Clavier.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="HARD_8042_Clavier.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HARD_8253_Timer.asm" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="HARD_8253_Timer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IRQ.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="IRQ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Info_Boot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_GDT.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="Init_GDT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_IDT.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Init_IDT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_TSS.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Init_TSS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MACRO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ordonnanceur.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Ordonnanceur.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Outils.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandlineTool>i586-pc-elf-gcc.exe</commandlineTool>
+        </cTool>
+      </item>
+      <item path="Outils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PIC_8259A.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="PIC_8259A.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PLAN_MEMOIRE.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pagination.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Pagination.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Processus.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Processus.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tas_Pages_Systeme.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tas_pages_Systeme.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="type.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>MinGW_ELF|MinGW</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <stripSymbols>true</stripSymbols>
+          <architecture>1</architecture>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+          <commandLine>-f elf</commandLine>
+        </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/noyau.jlv</output>
+          <stripSymbols>true</stripSymbols>
+          <commandlineTool>i586-pc-elf-ld.exe</commandlineTool>
+          <commandLine>-Ttext=0x100000 -Tdata=0x200000 --entry=_start --oformat i586-pc-elf -Map=Noyau.map</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="0-Noyau_Start.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="1-Noyau_Main.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <additionalDep></additionalDep>
+        </cTool>
+      </item>
+      <item path="API.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="API.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Allocation_Pages.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Allocation_Pages.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Appels_Systeme.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="Appels_Systeme.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BitMap_Memoire.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="BitMap_Memoire.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_Clavier.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_Exception.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_Exception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_IRQ.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="CallBack_IRQ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CallBack_VIDEO.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Commutation.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="Descripteurs.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Descripteurs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EXCEPTIONS.asm" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="EXCEPTIONS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ecran.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <developmentMode>6</developmentMode>
+        </cTool>
+      </item>
+      <item path="Ecran.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HARD_8042_Clavier.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="HARD_8042_Clavier.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HARD_8253_Timer.asm" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="HARD_8253_Timer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IRQ.ASM" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="IRQ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Info_Boot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_GDT.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Init_GDT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_IDT.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <commandLine>-nostdlib</commandLine>
+        </cTool>
+      </item>
+      <item path="Init_IDT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Init_TSS.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Init_TSS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MACRO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ordonnanceur.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Ordonnanceur.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Outils.c" ex="false" tool="0" flavor2="0">
+        <cTool>
+          <developmentMode>6</developmentMode>
+          <stripSymbols>false</stripSymbols>
+          <architecture>0</architecture>
+          <warningLevel>1</warningLevel>
+        </cTool>
+      </item>
+      <item path="Outils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PIC_8259A.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="PIC_8259A.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PLAN_MEMOIRE.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pagination.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Pagination.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Processus.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Processus.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="type.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
