@@ -15,6 +15,7 @@
 #include "Ordonnanceur.h"
 #include "BitMap_Memoire.h"
 #include "API.h"
+#include "Screen_Manager.h"
 
 
 
@@ -71,22 +72,26 @@ char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
                                   // ce code étant éxécuté en ring 3
                                   // on est donc dans le segment data du process
                                   // l'adresse 0 est en réalité "BASE_DATA_USER"
-
- while(1) {
-
-		//API_puts((char*)0x0002000,15);
-
+	int i = 0;
+	while (1) {
+		if (i == 1) {
+			API_puts((char*) 0x0002000, 15);
+			i = 0;
+		}
+		i++;
      }
- 
 }
 
   
-volatile void Processus_1()
-{
-char* L_Message=(char*)0x0002000; // on stocke la chaine en DS:xxxxx
+volatile void Processus_1() {
+	char* L_Message = (char*) 0x0002000; // on stocke la chaine en DS:xxxxx
+	int i = 0;
  while(1) {
-
-		//API_puts((char*)0x0002000,4);
+		if (i == 1) {
+			API_puts((char*) 0x0002000, 4);
+			i = 0;
+		}
+		i++;
  }
  
  }
@@ -187,8 +192,9 @@ void OS_Main() {
 	//Attendre_Touche_Relache();
 
 	Periode_Ordonnanceur = 10L;
+	switchScreen(0);
 	Donne_La_Main_Au_Processus(0); // donne la main en faisant via le schéduleur => les int sont donc activées
-  
+	
    while(1);
  }
 

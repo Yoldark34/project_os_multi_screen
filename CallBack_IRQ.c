@@ -37,11 +37,11 @@ void CallBack_IRQ1()
 	switch (L_Code) {
 		case 78:
 			Periode_Ordonnanceur += 5;
-			if (Periode_Ordonnanceur > 400L) Periode_Ordonnanceur = 400L;
+			//if (Periode_Ordonnanceur > 400L) Periode_Ordonnanceur = 400L;
 			break;
 		case 74:
 			Periode_Ordonnanceur -= 5;
-			if (Periode_Ordonnanceur < 6L) Periode_Ordonnanceur = 6L;
+			//if (Periode_Ordonnanceur < 6L) Periode_Ordonnanceur = 6L;
 			break;
 		case 29://LCtrl down
 			Ctrl = true;

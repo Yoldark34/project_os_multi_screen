@@ -39,7 +39,8 @@ void SetBuffer() {
 	Buf_Charge_Buf_Actuel_To_Screen();
 }
 
-void Buf_Efface_Ecran() {
+void Buf_Efface_Ecran(UINT32 P_Pid) {
+	boolean affiche_ecran_actuel = ThisPidIsDisplayedOnTheCurentScreen(P_Pid);
 	UINT16 L_Index;
 	for (L_Index = 0; L_Index < NOMBRE_ELEMENTS; L_Index++) {
 		Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Cellules[L_Index].Attribut = 0x07;
@@ -49,11 +50,15 @@ void Buf_Efface_Ecran() {
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_X = 0;
 	Buf_ECRAN_Curseur_Y = 0;
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_Y = 0;
+	if (affiche_ecran_actuel) {
+		Efface_Ecran();
+	}
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void Buf_Remplir_Ecran(UCHAR P_Caractere, BYTE P_Attribut) {
+void Buf_Remplir_Ecran(UCHAR P_Caractere, BYTE P_Attribut, UINT32 P_Pid) {
+	boolean affiche_ecran_actuel = ThisPidIsDisplayedOnTheCurentScreen(P_Pid);
 	UINT16 L_Index;
 	for (L_Index = 0; L_Index < NOMBRE_ELEMENTS; L_Index++) {
 		Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Cellules[L_Index].Attribut = P_Attribut;
@@ -63,6 +68,9 @@ void Buf_Remplir_Ecran(UCHAR P_Caractere, BYTE P_Attribut) {
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_X = 0;
 	Buf_ECRAN_Curseur_Y = 0;
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_Y = 0;
+	if (affiche_ecran_actuel) {
+		Remplir_Ecran(P_Caractere, P_Attribut);
+	}
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -91,11 +99,15 @@ void Buf_Defilement_Haut() {
 
 //--------------------------------------------------------------------------------------------------
 
-inline void Buf_Positionne_Curseur(BYTE P_X, BYTE P_Y) {
+inline void Buf_Positionne_Curseur(BYTE P_X, BYTE P_Y, UINT32 P_Pid) {
+	boolean affiche_ecran_actuel = ThisPidIsDisplayedOnTheCurentScreen(P_Pid);
 	Buf_ECRAN_Curseur_X = P_X;
 	Buf_ECRAN_Curseur_Y = P_Y;
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_X = P_X;
 	Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_Y = P_Y;
+	if (affiche_ecran_actuel) {
+		Positionne_Curseur(P_X, P_Y);
+	}
 }
 //--------------------------------------------------------------------------------------------------
 
@@ -117,7 +129,8 @@ inline void Buf_Repositionne_Curseur() {
 
 //--------------------------------------------------------------------------------------------------
 
-inline void Buf_Affiche_Caractere(UCHAR P_Caractere) {
+inline void Buf_Affiche_Caractere(UCHAR P_Caractere, UINT32 P_Pid) {
+	boolean affiche_ecran_actuel = ThisPidIsDisplayedOnTheCurentScreen(P_Pid);
 	UINT16 L_Offset;
 	switch (P_Caractere) {
 		case 10: Buf_ECRAN_Curseur_Y++;
@@ -139,6 +152,10 @@ inline void Buf_Affiche_Caractere(UCHAR P_Caractere) {
 			Screen_Buffers->listBuffers[Screen_Buffers->currentWritingIndex].Curseur_X++;
 	}
 	Buf_Repositionne_Curseur();
+	if (affiche_ecran_actuel) {
+		Regle_Couleur(Buf_Attribut_Actuel);
+		Affiche_Caractere(P_Caractere);
+	}
 }
 
 
@@ -150,11 +167,7 @@ void Buf_Affiche_Chaine(UCHAR P_Chaine[], UINT32 P_Pid) {
 	boolean affiche_ecran_actuel = ThisPidIsDisplayedOnTheCurentScreen(P_Pid);
 
 	while (P_Chaine[L_Index] != 0) {
-		if (affiche_ecran_actuel) {
-			Regle_Couleur(Buf_Attribut_Actuel);
-			Affiche_Caractere(P_Chaine[L_Index]);
-		}
-		Buf_Affiche_Caractere(P_Chaine[L_Index]);
+		Buf_Affiche_Caractere(P_Chaine[L_Index], P_Pid);
 		L_Index++;
 	}
 	if (affiche_ecran_actuel) {
@@ -183,11 +196,11 @@ BYTE Buf_Donne_Curseur_Y() {
 
 //--------------------------------------------------------------------------------------------------
 
-void Buf_Affiche_Liste_Caracteres(UCHAR P_Caractere, UINT16 P_Repetition) {
+void Buf_Affiche_Liste_Caracteres(UCHAR P_Caractere, UINT16 P_Repetition, UINT32 P_Pid) {
 	int L_Index;
 
 	for (L_Index = 0; L_Index < P_Repetition; ++L_Index) {
-		Buf_Affiche_Caractere(P_Caractere);
+		Buf_Affiche_Caractere(P_Caractere, P_Pid);
 	}
 }
 

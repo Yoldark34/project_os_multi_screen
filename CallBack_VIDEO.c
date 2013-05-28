@@ -1,8 +1,10 @@
-#include "Ecran.h"
+#include "Buffer_Manager.h"
 #include "Outils.h"
 #include "PLAN_MEMOIRE.h"
 #include "Descripteurs.h"
 #include "MACRO.h"
+#include "Processus.h"
+#include "Ordonnanceur.h"
 
 
 
@@ -63,18 +65,24 @@ T_DESCRIPTEUR_SEGMENT* L_Descripteur_Data;
     Affiche_Caractere('\n');
 #endif    
 
+	T_INFO_PROCESSUS* L_Process_Actuel = (T_INFO_PROCESSUS*) (ADRESSE_INFO_PROCESS + (Numero_Process_Courrant * sizeof (T_INFO_PROCESSUS)));
+	switch (P_EAX) {
+		case 0: Buf_Remplir_Ecran((P_EBX >> 8)&0xFF, P_EBX & 0xFF, L_Process_Actuel->Pid);
+			break;
+		case 1: Buf_Positionne_Curseur((P_EBX >> 8)&0xFF, P_EBX & 0xFF, L_Process_Actuel->Pid);
+			break;
+		case 2: Buf_Regle_Couleur(P_EBX & 0xFF);
+			Buf_Affiche_Chaine((P_EBX >> 8)&0xFF, L_Process_Actuel->Pid);
+			break;
+		case 3: Buf_Regle_Couleur(P_ECX & 0xFF);
 
-    switch (P_EAX) {
-        case 0 : Remplir_Ecran( (P_EBX>>8)&0xFF, P_EBX&0xFF); break;
-        case 1 : Positionne_Curseur((P_EBX>>8)&0xFF, P_EBX&0xFF); break;
-        case 2 : Regle_Couleur(P_EBX&0xFF);
-                 Affiche_Caractere((P_EBX>>8)&0xFF); break;
-        case 3 : Regle_Couleur(P_ECX & 0xFF);
-                 Affiche_Chaine((UCHAR*)(L_Base_Segment_Data + P_EBX)); break;     
-                 
-        case 4 : Affiche_Liste_Caracteres(P_EBX & 0XFF,  P_ECX & 0xFFFF); break;         
-        
-    }
+			Buf_Affiche_Chaine((UCHAR*) (L_Base_Segment_Data + P_EBX), L_Process_Actuel->Pid);
+			break;
+
+		case 4: Affiche_Liste_Caracteres(P_EBX & 0XFF, P_ECX & 0xFFFF);
+			break;
+
+	}
 
 
 

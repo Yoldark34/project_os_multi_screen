@@ -7,7 +7,7 @@
 #include "Ordonnanceur.h"
 #include "Ecran.h"
 
-volatile UINT32 Periode_Ordonnanceur=100L;
+volatile UINT32 Periode_Ordonnanceur = 100L;
 UINT32 Numero_Process_Courrant=0;
 UINT32 Compteur_Tic_Ordonnanceur=0;
 
@@ -21,7 +21,7 @@ UINT32 Compteur_Tic_Ordonnanceur=0;
  L_Pile +=2;  // Ignorer le EBP et le EIP générés par l'appel à cette fonction
  
  Compteur_Tic_Ordonnanceur++;
- if (Compteur_Tic_Ordonnanceur>Periode_Ordonnanceur) {
+	if (Compteur_Tic_Ordonnanceur > Periode_Ordonnanceur) {
      Compteur_Tic_Ordonnanceur=0;
  //   
   T_INFO_PROCESSUS* L_Process_Actuel=(T_INFO_PROCESSUS*) (ADRESSE_INFO_PROCESS + (Numero_Process_Courrant*sizeof(T_INFO_PROCESSUS)) );

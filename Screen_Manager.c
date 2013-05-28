@@ -101,11 +101,11 @@ void BufferToScreen() {
 
 	SetBuffer();
 
-	if (init) {
+	/*if (init) {
 		Buf_Regle_Couleur(ROUGE);
 		Buf_Affiche_Chaine("\n\n\n\n", 1);
 		Buf_Affiche_Chaine("Ecran :", 1);
 		Buf_Affiche_Chaine(Entier_Vers_Chaine(g_screenBuffers->currentScreenIndex + 1), 1);
-	}
+	}*/
 }
 
