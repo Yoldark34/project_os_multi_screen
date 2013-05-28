@@ -89,10 +89,7 @@ void InitBuffer() {
 }
 
 void BufferToScreen() {
-	int l_indexCellule;
 	boolean init = false;
-	int save_curseur_x;
-	int save_curseur_y;
 
 	if (g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].init == false) {
 
@@ -104,37 +101,11 @@ void BufferToScreen() {
 
 	SetBuffer();
 
-	/*save_curseur_x = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_X;
-	save_curseur_y = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_Y;*/
-
-	
-
-	
-	/*for (l_indexCellule = 0; l_indexCellule < NOMBRE_ELEMENTS; l_indexCellule++) {
-		Buf_Attribut_Actuel(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Attribut);
-		Buf_Affiche_Caractere(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Caractere);
-	}*/
-
-	/*l_indexCellule = 0;
-	save_curseur_x = 0;
-	save_curseur_y = 0;
-	while (l_indexCellule < 200000)
-	{
-		l_indexCellule ++;
-		save_curseur_x ++;
-		if (save_curseur_x == 25000) {
-			save_curseur_y++;
-
-			save_curseur_x = 0;
-		}
-	}*/
-
 	if (init) {
 		Buf_Regle_Couleur(ROUGE);
 		Buf_Affiche_Chaine("\n\n\n\n", 1);
 		Buf_Affiche_Chaine("Ecran :", 1);
 		Buf_Affiche_Chaine(Entier_Vers_Chaine(g_screenBuffers->currentScreenIndex + 1), 1);
 	}
-	//Affiche_Chaine("A");
 }
 
