@@ -7,23 +7,25 @@
 
 #ifndef SCREEN_BUFFER_H
 #define	SCREEN_BUFFER_H
-#include "Buffer_Manager.h"
+//#include "Buffer_Manager.h"
+#include "Ecran.h"
 #define NB_SCREEN 12
 
 void Initialisation_Multi_Screen();
 
-typedef struct screen_buffer {
+typedef struct buffer {
 	T_CARACTERE_ECRAN Cellules[NOMBRE_ELEMENTS];
 	BYTE Curseur_X;
 	BYTE Curseur_Y;
 	BYTE Attribut;
 	boolean init;
-} screen_buffer;
+} buffer;
 
-typedef struct ScreenBuffer {
+typedef struct ScreenBuffers {
 	int currentScreenIndex;
-	screen_buffer listBuffers[NB_SCREEN];
-} ScreenBuffer;
+	int currentWritingIndex;
+	buffer listBuffers[NB_SCREEN];
+} ScreenBuffers;
 
 #endif	/* SCREEN_BUFFER_H */
 

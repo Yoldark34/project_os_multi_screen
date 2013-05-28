@@ -15,10 +15,8 @@ typedef struct pidOutScreen {
 	assoc listAssocs[NB_PROCESS_MAX];
 } pidOutScreen;
 
-
-
 pidOutScreen* g_pidOutScreens;
-ScreenBuffer* g_screenBuffers;
+ScreenBuffers* g_screenBuffers;
 
 int getScreenIndexFromPid(UINT32 p_pid);
 void switchScreen(int p_screenIndex);
@@ -30,16 +28,29 @@ void Initialisation_Multi_Screen() {
 	UINT32 L_Adresse_Table = ADRESSE_MULTI_SCREEN;
 	Creation_Tables_Pages_Process(L_Adresse_Table);
 	g_pidOutScreens = (pidOutScreen*) (ADRESSE_MULTI_SCREEN + (sizeof (pidOutScreen)));
-	g_screenBuffers = (ScreenBuffer*) (ADRESSE_MULTI_SCREEN + (sizeof (pidOutScreen) + (sizeof (ScreenBuffer))));
+	g_screenBuffers = (ScreenBuffers*) (ADRESSE_MULTI_SCREEN + (sizeof (pidOutScreen) + (sizeof (ScreenBuffers))));
 	for (l_index = 0; l_index < NB_SCREEN; l_index++) {
 		g_screenBuffers->listBuffers[l_index].init = false;
 	}
+	g_screenBuffers->currentScreenIndex = -1;
+	g_screenBuffers->currentWritingIndex = -1;
+	g_pidOutScreens->maxUsedIndex = 0;
+
+	SetCurrentBuffers(g_screenBuffers);
+}
+
+boolean ThisPidIsDisplayedOnTheCurentScreen(UINT32 p_pid) {
+	if (getScreenIndexFromPid(p_pid) == g_screenBuffers->currentScreenIndex) {
+		return true;
+	}
+	return false;
 }
 
 int getScreenIndexFromPid(UINT32 p_pid) {
 	int l_screenIndex = -1;
 	int l_index = 0;
-	while (l_screenIndex == -1 && l_index < NB_PROCESS_MAX) {
+	int test = 0;
+	while (l_screenIndex == -1 && l_index < g_pidOutScreens->maxUsedIndex) {
 		if (g_pidOutScreens->listAssocs[l_index].pid == p_pid) {
 			l_screenIndex = g_pidOutScreens->listAssocs[l_index].screenIndex;
 		}
@@ -47,15 +58,16 @@ int getScreenIndexFromPid(UINT32 p_pid) {
 	}
 	if (l_screenIndex == -1) {
 		l_screenIndex = g_screenBuffers->currentScreenIndex;
-		g_pidOutScreens->maxUsedIndex++;
 		g_pidOutScreens->listAssocs[g_pidOutScreens->maxUsedIndex].pid = p_pid;
 		g_pidOutScreens->listAssocs[g_pidOutScreens->maxUsedIndex].screenIndex = g_screenBuffers->currentScreenIndex;
+		g_pidOutScreens->maxUsedIndex++;
 	}
+	g_screenBuffers->currentWritingIndex = l_screenIndex;
+
 	return l_screenIndex;
 }
 
 void switchScreen(int p_screenIndex) {
-	Affiche_Chaine(Entier_Vers_Chaine(p_screenIndex));
 	if (g_screenBuffers->currentScreenIndex != p_screenIndex) {
 		g_screenBuffers->currentScreenIndex = p_screenIndex;
 		BufferToScreen();
@@ -87,22 +99,42 @@ void BufferToScreen() {
 		InitBuffer();
 		init = true;
 	}
-	Buf_SetCurrentBuffer(g_screenBuffers);
 	Efface_Ecran();
 	Positionne_Curseur(0, 0);
-	save_curseur_x = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_X;
-	save_curseur_y = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_Y;
-	for (l_indexCellule = 0; l_indexCellule < NOMBRE_ELEMENTS; l_indexCellule++) {
-		Regle_Couleur(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Attribut);
-		Affiche_Caractere(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Caractere);
-	}
-	Positionne_Curseur(save_curseur_x, save_curseur_y);
+
+	SetBuffer();
+
+	/*save_curseur_x = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_X;
+	save_curseur_y = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_Y;*/
+
+	
+
+	
+	/*for (l_indexCellule = 0; l_indexCellule < NOMBRE_ELEMENTS; l_indexCellule++) {
+		Buf_Attribut_Actuel(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Attribut);
+		Buf_Affiche_Caractere(g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Caractere);
+	}*/
+
+	/*l_indexCellule = 0;
+	save_curseur_x = 0;
+	save_curseur_y = 0;
+	while (l_indexCellule < 200000)
+	{
+		l_indexCellule ++;
+		save_curseur_x ++;
+		if (save_curseur_x == 25000) {
+			save_curseur_y++;
+
+			save_curseur_x = 0;
+		}
+	}*/
 
 	if (init) {
-		Buf_Positionne_Curseur(0, 0);
-		Buf_Affiche_Chaine("Ecran :");
-		Buf_Affiche_Chaine(Entier_Vers_Chaine(g_screenBuffers->currentScreenIndex + 1));
+		Buf_Regle_Couleur(ROUGE);
+		Buf_Affiche_Chaine("\n\n\n\n", 1);
+		Buf_Affiche_Chaine("Ecran :", 1);
+		Buf_Affiche_Chaine(Entier_Vers_Chaine(g_screenBuffers->currentScreenIndex + 1), 1);
 	}
-	Affiche_Chaine("A");
+	//Affiche_Chaine("A");
 }
 

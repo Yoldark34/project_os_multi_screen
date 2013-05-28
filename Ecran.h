@@ -36,7 +36,7 @@ typedef struct {
 #pragma pack()
 
 //extern BYTE* Video;
-//extern T_CARACTERE_ECRAN* Map_Video;
+extern T_CARACTERE_ECRAN* Map_Video;
 
 //------------------------------------------------------------
 
