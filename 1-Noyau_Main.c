@@ -109,8 +109,7 @@ volatile void Processus_3() {
 	char* L_Message = (char*) 0x0002000; // on stocke la chaine en DS:xxxxx
 
 	while (1) {
-
-		//API_puts((char*)0x0002000,6);
+		API_puts((char*)0x0002000,6);
 	}
 
 }

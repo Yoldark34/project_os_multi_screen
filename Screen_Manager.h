@@ -13,6 +13,7 @@
 
 void Initialisation_Multi_Screen();
 void switchWritingContextFromPid(UINT32 P_Pid);
+void Attach_Pid_To_Screen(UINT32 p_pid, int p_screenId);
 
 typedef struct buffer {
 	T_CARACTERE_ECRAN Cellules[NOMBRE_ELEMENTS];

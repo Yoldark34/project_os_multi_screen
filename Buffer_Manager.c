@@ -208,22 +208,21 @@ void Buf_Affiche_Liste_Caracteres(UCHAR P_Caractere, UINT16 P_Repetition) {
 }
 
 void Buf_Charge_Buf_Actuel_To_Screen() {
-	//Affiche_Chaine("\n lastScreenIndex : ");
-	//Affiche_Chaine(Entier_Vers_Chaine(Screen_Buffers->lastScreenIndex));
 	if (Screen_Buffers->currentScreenIndex != Screen_Buffers->lastScreenIndex) {
 		Buf_Save_Actual_Screen_To_Buffer();
 	}
 	int L_Index;
 	for (L_Index = 0; L_Index < NOMBRE_ELEMENTS; L_Index++) {
-		Map_Video[L_Index] = Buf_Map_Video[L_Index];
+		Map_Video[L_Index] = Screen_Buffers->listBuffers[Screen_Buffers->currentScreenIndex].Cellules[L_Index];
 	}
 	Positionne_Curseur(Screen_Buffers->listBuffers[Screen_Buffers->currentScreenIndex].Curseur_X, Screen_Buffers->listBuffers[Screen_Buffers->currentScreenIndex].Curseur_Y);
 	Affiche_Curseur();
 }
 
 void Buf_Save_Actual_Screen_To_Buffer() {
-	if (Screen_Buffers->lastScreenIndex == -1) {//Seulement lors de la premiere utilisation pendant l'initialisation du multi screen
+	if (Screen_Buffers->lastScreenIndex == 9999) {//Seulement lors de la premiere utilisation pendant l'initialisation du multi screen Remplacer par -1
 		Screen_Buffers->lastScreenIndex = Screen_Buffers->currentScreenIndex;
+
 	}
 	int L_Index;
 	for (L_Index = 0; L_Index < NOMBRE_ELEMENTS; L_Index++) {
