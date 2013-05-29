@@ -41,7 +41,7 @@ void CallBack_IRQ1()
 			break;
 		case 74:
 			Periode_Ordonnanceur -= 5;
-			//if (Periode_Ordonnanceur < 6L) Periode_Ordonnanceur = 6L;
+			if (Periode_Ordonnanceur < 6L) Periode_Ordonnanceur = 6L;
 			break;
 		case 29://LCtrl down
 			Ctrl = true;

@@ -34,9 +34,11 @@ void Initialisation_Multi_Screen() {
 	}
 	g_screenBuffers->currentScreenIndex = -1;
 	g_screenBuffers->currentWritingIndex = -1;
+	g_screenBuffers->lastScreenIndex = -1;
 	g_pidOutScreens->maxUsedIndex = 0;
 
 	SetCurrentBuffers(g_screenBuffers);
+	switchScreen(0);
 }
 
 boolean ThisPidIsDisplayedOnTheCurentScreen(UINT32 p_pid) {
@@ -69,8 +71,20 @@ int getScreenIndexFromPid(UINT32 p_pid) {
 
 void switchScreen(int p_screenIndex) {
 	if (g_screenBuffers->currentScreenIndex != p_screenIndex) {
+		g_screenBuffers->lastScreenIndex = g_screenBuffers->currentScreenIndex; //-1 lors du premier appel
 		g_screenBuffers->currentScreenIndex = p_screenIndex;
+		//Affiche_Chaine("\n\n\n\n switch current context : ");
+		//Affiche_Chaine(Entier_Vers_Chaine(p_screenIndex));
 		BufferToScreen();
+	}
+}
+
+void switchWritingContextFromPid(UINT32 P_Pid) {
+	int L_Index = getScreenIndexFromPid(P_Pid);
+	//Affiche_Chaine("\n\n\n\n switch writing context : ");
+	//Affiche_Chaine(Entier_Vers_Chaine(L_Index));
+	if (g_screenBuffers->currentWritingIndex != L_Index) {
+		g_screenBuffers->currentWritingIndex = L_Index;
 	}
 }
 
@@ -92,20 +106,20 @@ void BufferToScreen() {
 	boolean init = false;
 
 	if (g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].init == false) {
-
 		InitBuffer();
 		init = true;
 	}
-	Efface_Ecran();
-	Positionne_Curseur(0, 0);
+	//Efface_Ecran();
+	//Positionne_Curseur(0, 0);
 
 	SetBuffer();
 
 	/*if (init) {
+		switchWritingContextFromPid(1);
 		Buf_Regle_Couleur(ROUGE);
-		Buf_Affiche_Chaine("\n\n\n\n", 1);
-		Buf_Affiche_Chaine("Ecran :", 1);
-		Buf_Affiche_Chaine(Entier_Vers_Chaine(g_screenBuffers->currentScreenIndex + 1), 1);
+		Buf_Affiche_Chaine("\n\n\n\n");
+		Buf_Affiche_Chaine("Ecran : ");
+		Buf_Affiche_Chaine(Entier_Vers_Chaine((g_screenBuffers->currentScreenIndex) + 1));
 	}*/
 }
 

@@ -12,6 +12,7 @@
 #define NB_SCREEN 12
 
 void Initialisation_Multi_Screen();
+void switchWritingContextFromPid(UINT32 P_Pid);
 
 typedef struct buffer {
 	T_CARACTERE_ECRAN Cellules[NOMBRE_ELEMENTS];
@@ -24,6 +25,7 @@ typedef struct buffer {
 typedef struct ScreenBuffers {
 	int currentScreenIndex;
 	int currentWritingIndex;
+	int lastScreenIndex;
 	buffer listBuffers[NB_SCREEN];
 } ScreenBuffers;
 
