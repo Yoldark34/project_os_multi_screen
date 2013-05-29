@@ -12,16 +12,16 @@ CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW_ELF-Windows
 CND_ARTIFACT_NAME_Debug=noyau.jlv
 CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW_ELF-Windows/noyau.jlv
 CND_PACKAGE_DIR_Debug=dist/Debug/MinGW_ELF-Windows/package
-CND_PACKAGE_NAME_Debug=15-noyaupaginationmulti-process-tsssyscall.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/MinGW_ELF-Windows/package/15-noyaupaginationmulti-process-tsssyscall.tar
+CND_PACKAGE_NAME_Debug=projectosmultiscreen.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW_ELF-Windows/package/projectosmultiscreen.tar
 # Release configuration
 CND_PLATFORM_Release=MinGW_ELF-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/MinGW_ELF-Windows
 CND_ARTIFACT_NAME_Release=noyau.jlv
 CND_ARTIFACT_PATH_Release=dist/Release/MinGW_ELF-Windows/noyau.jlv
 CND_PACKAGE_DIR_Release=dist/Release/MinGW_ELF-Windows/package
-CND_PACKAGE_NAME_Release=15-noyaupaginationmulti-process-tsssyscall.tar
-CND_PACKAGE_PATH_Release=dist/Release/MinGW_ELF-Windows/package/15-noyaupaginationmulti-process-tsssyscall.tar
+CND_PACKAGE_NAME_Release=projectosmultiscreen.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW_ELF-Windows/package/projectosmultiscreen.tar
 #
 # include compiler specific variables
 #

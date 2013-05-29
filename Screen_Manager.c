@@ -21,7 +21,7 @@ ScreenBuffers* g_screenBuffers;
 int getScreenIndexFromPid(UINT32 p_pid);
 void switchScreen(int p_screenIndex);
 void BufferToScreen();
-void InitBuffer();
+void InitBuffer(int index);
 
 void Initialisation_Multi_Screen() {
 	int l_index = 0;
@@ -32,15 +32,15 @@ void Initialisation_Multi_Screen() {
 	for (l_index = 0; l_index < NB_SCREEN; l_index++) {
 		g_screenBuffers->listBuffers[l_index].init = false;
 	}
-	g_screenBuffers->currentScreenIndex = 9999; //Remplacer par -1
-	g_screenBuffers->currentWritingIndex = 9999; //Remplacer par -1
-	g_screenBuffers->lastScreenIndex = 9999; //Remplacer par -1
+	g_screenBuffers->currentScreenIndex = -1; //Remplacer par -1
+	g_screenBuffers->currentWritingIndex = -1; //Remplacer par -1
+	g_screenBuffers->lastScreenIndex = -1; //Remplacer par -1
 	g_pidOutScreens->maxUsedIndex = 0;
 
 	Attach_Pid_To_Screen(1, 1);
 	Attach_Pid_To_Screen(2, 2);
 	Attach_Pid_To_Screen(3, 2);
-
+        
 	SetCurrentBuffers(g_screenBuffers);
 	switchScreen(0);
 }
@@ -52,7 +52,7 @@ void Attach_Pid_To_Screen(UINT32 p_pid, int p_screenId) {
 	g_pidOutScreens->listAssocs[g_pidOutScreens->maxUsedIndex] = test;
 	g_pidOutScreens->maxUsedIndex++;
 	if (g_screenBuffers->listBuffers[p_screenId].init == false) {
-		InitBuffer();
+                InitBuffer(p_screenId);
 	}
 }
 
@@ -86,9 +86,8 @@ int getScreenIndexFromPid(UINT32 p_pid) {
 
 void switchScreen(int p_screenIndex) {
 	if (g_screenBuffers->currentScreenIndex != p_screenIndex) {
-		g_screenBuffers->lastScreenIndex = g_screenBuffers->currentScreenIndex; //9999 lors du premier appel Remplacer par -1
+		g_screenBuffers->lastScreenIndex = g_screenBuffers->currentScreenIndex; //-1 lors du premier appel Remplacer par -1
 		g_screenBuffers->currentScreenIndex = p_screenIndex;
-
 		BufferToScreen();
 	}
 }
@@ -101,28 +100,27 @@ void switchWritingContextFromPid(UINT32 P_Pid) {
 	}
 }
 
-void InitBuffer() {
+void InitBuffer(int index) {
 	int l_indexCellule;
 
-	g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Attribut = 0x07;
-	g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_X = 0;
-	g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Curseur_Y = 0;
+	g_screenBuffers->listBuffers[index].Attribut = 0x07;
+	g_screenBuffers->listBuffers[index].Curseur_X = 0;
+	g_screenBuffers->listBuffers[index].Curseur_Y = 0;
 
 	for (l_indexCellule = 0; l_indexCellule < NOMBRE_ELEMENTS; l_indexCellule++) {
-		g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Caractere = ' ';
-		g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Cellules[l_indexCellule].Attribut = g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].Attribut;
+		g_screenBuffers->listBuffers[index].Cellules[l_indexCellule].Caractere = ' ';
+		g_screenBuffers->listBuffers[index].Cellules[l_indexCellule].Attribut = g_screenBuffers->listBuffers[index].Attribut;
 	}
-	g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].init = true;
+	g_screenBuffers->listBuffers[index].init = true;
 }
 
 void BufferToScreen() {
 	boolean init = false;
 
 	if (g_screenBuffers->listBuffers[g_screenBuffers->currentScreenIndex].init == false) {
-		InitBuffer();
+		InitBuffer(g_screenBuffers->currentScreenIndex);
 		init = true;
 	}
-
 	SetBuffer();
 }
 

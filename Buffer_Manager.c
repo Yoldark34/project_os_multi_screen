@@ -220,9 +220,8 @@ void Buf_Charge_Buf_Actuel_To_Screen() {
 }
 
 void Buf_Save_Actual_Screen_To_Buffer() {
-	if (Screen_Buffers->lastScreenIndex == 9999) {//Seulement lors de la premiere utilisation pendant l'initialisation du multi screen Remplacer par -1
+	if (Screen_Buffers->lastScreenIndex == -1) {//Seulement lors de la premiere utilisation pendant l'initialisation du multi screen Remplacer par -1
 		Screen_Buffers->lastScreenIndex = Screen_Buffers->currentScreenIndex;
-
 	}
 	int L_Index;
 	for (L_Index = 0; L_Index < NOMBRE_ELEMENTS; L_Index++) {

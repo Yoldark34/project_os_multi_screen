@@ -14,7 +14,7 @@ NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
 OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/noyau.jlv
 OUTPUT_BASENAME=noyau.jlv
-PACKAGE_TOP_DIR=15-noyaupaginationmulti-process-tsssyscall/
+PACKAGE_TOP_DIR=projectosmultiscreen/
 
 # Functions
 function checkReturnCode
@@ -59,15 +59,15 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/15-noyaupaginationmulti-process-tsssyscall/bin"
+makeDirectory "${NBTMPDIR}/projectosmultiscreen/bin"
 copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/15-noyaupaginationmulti-process-tsssyscall.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/projectosmultiscreen.tar
 cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/15-noyaupaginationmulti-process-tsssyscall.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/projectosmultiscreen.tar *
 checkReturnCode
 
 # Cleanup

@@ -108,7 +108,7 @@ Address of section .data set to 0x200000
  *(.iplt)
  .iplt          0x00000000        0x0 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
 
-.text           0x00100000     0x3b29
+.text           0x00100000     0x3af9
  *(.text.unlikely .text.*_unlikely)
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x00100000       0x18 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
@@ -307,49 +307,49 @@ Address of section .data set to 0x200000
                 0x001036c0                Charge_Processus
                 0x001037e0                Copier_Memoire_Process
  *fill*         0x00103816        0xa 90909090
- .text          0x00103820      0x309 build/Release/MinGW_ELF-Windows/Screen_Manager.o
+ .text          0x00103820      0x2d9 build/Release/MinGW_ELF-Windows/Screen_Manager.o
                 0x00103820                InitBuffer
-                0x001038f0                Attach_Pid_To_Screen
-                0x00103950                getScreenIndexFromPid
-                0x001039d0                ThisPidIsDisplayedOnTheCurentScreen
-                0x001039f0                switchWritingContextFromPid
-                0x00103a10                BufferToScreen
-                0x00103a50                switchScreen
-                0x00103a80                Initialisation_Multi_Screen
+                0x001038c0                Attach_Pid_To_Screen
+                0x00103920                getScreenIndexFromPid
+                0x001039a0                ThisPidIsDisplayedOnTheCurentScreen
+                0x001039c0                switchWritingContextFromPid
+                0x001039e0                BufferToScreen
+                0x00103a20                switchScreen
+                0x00103a50                Initialisation_Multi_Screen
  *(.gnu.warning)
 
 .fini
  *(.fini)
-                0x00103b29                PROVIDE (__etext, .)
-                0x00103b29                PROVIDE (_etext, .)
-                0x00103b29                PROVIDE (etext, .)
+                0x00103af9                PROVIDE (__etext, .)
+                0x00103af9                PROVIDE (_etext, .)
+                0x00103af9                PROVIDE (etext, .)
 
-.rodata         0x00103b2c      0x5be
+.rodata         0x00103afc      0x5be
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.str1.1
-                0x00103b2c       0xdf build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
- *fill*         0x00103c0b        0x1 00
+                0x00103afc       0xdf build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
+ *fill*         0x00103bdb        0x1 00
  .rodata.str1.4
-                0x00103c0c      0x227 build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
+                0x00103bdc      0x227 build/Release/MinGW_ELF-Windows/1-Noyau_Main.o
  .rodata.str1.1
-                0x00103e33       0x38 build/Release/MinGW_ELF-Windows/Allocation_Pages.o
+                0x00103e03       0x38 build/Release/MinGW_ELF-Windows/Allocation_Pages.o
  .rodata.str1.1
-                0x00103e6b       0x1f build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
- *fill*         0x00103e8a        0x2 00
+                0x00103e3b       0x1f build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
+ *fill*         0x00103e5a        0x2 00
  .rodata.str1.4
-                0x00103e8c       0x28 build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
+                0x00103e5c       0x28 build/Release/MinGW_ELF-Windows/BitMap_Memoire.o
                                  0x25 (size before relaxing)
  .rodata.str1.1
-                0x00103eb4      0x118 build/Release/MinGW_ELF-Windows/CallBack_Exception.o
+                0x00103e84      0x118 build/Release/MinGW_ELF-Windows/CallBack_Exception.o
                                 0x11b (size before relaxing)
  .rodata.str1.1
-                0x00103fcc       0x5d build/Release/MinGW_ELF-Windows/CallBack_IRQ.o
- *fill*         0x00104029        0x3 00
- .rodata        0x0010402c       0x14 build/Release/MinGW_ELF-Windows/CallBack_VIDEO.o
+                0x00103f9c       0x5d build/Release/MinGW_ELF-Windows/CallBack_IRQ.o
+ *fill*         0x00103ff9        0x3 00
+ .rodata        0x00103ffc       0x14 build/Release/MinGW_ELF-Windows/CallBack_VIDEO.o
  .rodata.str1.1
-                0x00104040       0x2c build/Release/MinGW_ELF-Windows/Descripteurs.o
+                0x00104010       0x2c build/Release/MinGW_ELF-Windows/Descripteurs.o
  .rodata.str1.1
-                0x0010406c       0x7e build/Release/MinGW_ELF-Windows/Pagination.o
+                0x0010403c       0x7e build/Release/MinGW_ELF-Windows/Pagination.o
                                  0x80 (size before relaxing)
 
 .rodata1
@@ -363,8 +363,8 @@ Address of section .data set to 0x200000
 
 .gcc_except_table
  *(.gcc_except_table .gcc_except_table.*)
-                0x001040ea                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
-                0x001050ea                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
+                0x001040ba                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
+                0x001050ba                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
 
 .eh_frame
  *(.eh_frame)
@@ -379,22 +379,22 @@ Address of section .data set to 0x200000
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.preinit_array  0x001050ea        0x0
-                0x001050ea                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x001050ba        0x0
+                0x001050ba                PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
-                0x001050ea                PROVIDE (__preinit_array_end, .)
+                0x001050ba                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x001050ea        0x0
-                0x001050ea                PROVIDE (__init_array_start, .)
+.init_array     0x001050ba        0x0
+                0x001050ba                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array)
-                0x001050ea                PROVIDE (__init_array_end, .)
+                0x001050ba                PROVIDE (__init_array_end, .)
 
-.fini_array     0x001050ea        0x0
-                0x001050ea                PROVIDE (__fini_array_start, .)
+.fini_array     0x001050ba        0x0
+                0x001050ba                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array)
-                0x001050ea                PROVIDE (__fini_array_end, .)
+                0x001050ba                PROVIDE (__fini_array_end, .)
 
 .ctors
  *crtbegin.o(.ctors)
@@ -423,9 +423,9 @@ Address of section .data set to 0x200000
 .got
  *(.got)
  *(.igot)
-                0x001050ea                . = (. DATA_SEGMENT_RELRO_END 0xc)
+                0x001050ba                . = (. DATA_SEGMENT_RELRO_END 0xc)
 
-.got.plt        0x001050ec        0x0 load address 0x001050ea
+.got.plt        0x001050bc        0x0 load address 0x001050ba
  *(.got.plt)
  *(.igot.plt)
  .igot.plt      0x00000000        0x0 build/Release/MinGW_ELF-Windows/0-Noyau_Start.o
