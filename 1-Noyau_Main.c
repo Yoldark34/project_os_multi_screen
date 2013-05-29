@@ -184,7 +184,6 @@ void OS_Main() {
 	//Attendre_Touche_Relache();
 
 	Periode_Ordonnanceur = 10L;
-	switchScreen(0);
 	Donne_La_Main_Au_Processus(0); // donne la main en faisant via le schéduleur => les int sont donc activées
 
 	while (1);
